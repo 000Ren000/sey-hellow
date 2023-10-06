@@ -11,15 +11,11 @@ const bot = new TelegramBot(token, {polling: true})
 const auth = Buffer.from('Администратор:2609').toString('base64')
 const url = 'http://localhost/CopyUT/hs/mobile/getUser'
 const bodyRequest = { name: 'Фондов'}
-getUserAx()
 
 bot.on('message', (msg) => {
     const chatId = msg.chat.id
-    const data = handleCommands(msg.text)
-
     if (data !== '') {
-        getUser()
-        bot.sendMessage(chatId, data)
+        handleCommands(msg.text).then(data => { bot.sendMessage(chatId, JSON.stringify(data)) })
     }
 })
 
@@ -35,23 +31,16 @@ async function getUser() {
             data: JSON.stringify(bodyRequest),
             responseType: 'json'
         })
-        return response.data
+        return response.data[0]
     } catch (error) {
         return ''
     }
-
-
 }
 
 
-function handleCommands(commands) {
-
-
+ function handleCommands(commands) {
     if (commands === '/getUser') {
-
-
-        return 'it`s Working'
+        return  getUser()
     }
-
     return ''
 }
