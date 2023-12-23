@@ -4,7 +4,7 @@ const app = express();
 
 
 const TelegramBot = require('node-telegram-bot-api');
-const token = '6131297068:AAHk1AbCRpq5gm4kkYiKKp__vfREeDOZASY';
+const token = '5736645804:AAFo3eb8VrSJYdD2ISvPQlw-CFrE3aUWlKI';
 const chatId = '996600001'
 const bot = new TelegramBot(token, {polling: true});
 
